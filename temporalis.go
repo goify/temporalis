@@ -85,8 +85,10 @@ func ConvertTimezone(t time.Time, from, to string) (time.Time, error) {
 
 func DateRange(start, end time.Time) []time.Time {
 	var dates []time.Time
+
 	for d := start; !d.After(end); d = d.AddDate(0, 0, 1) {
 		dates = append(dates, d)
 	}
+
 	return dates
 }
