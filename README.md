@@ -36,6 +36,8 @@ func main() {
 }
 ```
 
+In this example, the `temporalis.Now()` function returns the current time, and then the `temporalis.Format` function is used to format that time using a layout string. The resulting formatted string will be in the format `2006-01-02 15:04:05`.
+
 ## Testing
 
 ```bash
