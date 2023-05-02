@@ -152,3 +152,16 @@ func FormatDuration(duration time.Duration) string {
 		return fmt.Sprintf("%d milliseconds", milliseconds)
 	}
 }
+
+func BusinessHours(from, to time.Time, holidays []time.Time) time.Duration {
+	var total time.Duration
+
+	for from.Before(to) {
+		if from.Weekday() != time.Saturday && from.Weekday() != time.Sunday && !isHoliday(from, holidays) {
+			total += time.Hour
+		}
+		from = from.Add(time.Hour)
+	}
+
+	return total
+}
