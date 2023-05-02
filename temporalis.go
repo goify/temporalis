@@ -35,7 +35,24 @@ func Sleep(d time.Duration) {
 }
 
 func Tick(d time.Duration) <-chan time.Time {
-	return time.Tick(d)
+	ticker := time.NewTicker(d)
+	done := make(chan struct{})
+	c := make(chan time.Time)
+
+	go func() {
+		for {
+			select {
+			case t := <-ticker.C:
+				c <- t
+			case <-done:
+				ticker.Stop()
+				close(c)
+				return
+			}
+		}
+	}()
+
+	return c
 }
 
 // Additional functions for formatting and parsing.
