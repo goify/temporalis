@@ -197,3 +197,14 @@ func UnixTimestamp(t time.Time) int64 {
 func FromUnixTimestamp(timestamp int64) time.Time {
 	return time.Unix(timestamp, 0)
 }
+
+func TimezoneOffset(tz string, t time.Time) (int, error) {
+	loc, err := time.LoadLocation(tz)
+
+	if err != nil {
+		return 0, err
+	}
+	_, offset := t.In(loc).Zone()
+
+	return offset, nil
+}
