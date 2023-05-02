@@ -185,3 +185,7 @@ func IsLeapYear(year int) bool {
 func TimeDifference(from, to time.Time) time.Duration {
 	return to.Sub(from)
 }
+
+func FormatTime(t time.Time, format string) string {
+	return t.Format(format)
+}
