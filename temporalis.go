@@ -166,6 +166,18 @@ func BusinessHours(from, to time.Time, holidays []time.Time) time.Duration {
 	return total
 }
 
+func BusinessDays(from, to time.Time, holidays []time.Time) int {
+	var total int
+
+	for d := from; !d.After(to); d = d.AddDate(0, 0, 1) {
+		if d.Weekday() != time.Saturday && d.Weekday() != time.Sunday && !isHoliday(d, holidays) {
+			total++
+		}
+	}
+
+	return total
+}
+
 func IsLeapYear(year int) bool {
 	return year%4 == 0 && (year%100 != 0 || year%400 == 0)
 }
