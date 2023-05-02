@@ -1,8 +1,6 @@
 package temporalis
 
-import (
-	"time"
-)
+import "time"
 
 func After(d time.Duration) <-chan time.Time {
 	return time.After(d)
