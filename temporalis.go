@@ -62,3 +62,7 @@ func Parse(layout, value string) (time.Time, error) {
 func ParseInLocation(layout, value string, loc *time.Location) (time.Time, error) {
 	return time.ParseInLocation(layout, value, loc)
 }
+
+func ParseTime(str, format string) (time.Time, error) {
+	return time.Parse(format, str)
+}
