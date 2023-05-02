@@ -38,6 +38,28 @@ func main() {
 
 In this example, the `temporalis.Now()` function returns the current time, and then the `temporalis.Format` function is used to format that time using a layout string. The resulting formatted string will be in the format `2006-01-02 15:04:05`.
 
+`temporalis` also includes additional functions for formatting and parsing time values. Here's an example usage of the `temporalis.Parse` function:
+
+```go
+package main
+
+import (
+    "fmt"
+
+    "github.com/your-username/temporalis"
+)
+
+func main() {
+    str := "2022-05-02 10:30:00"
+    t, err := temporalis.Parse("2006-01-02 15:04:05", str)
+    if err != nil {
+        fmt.Println("Error parsing time:", err)
+        return
+    }
+    fmt.Println(t)
+}
+```
+
 ## Testing
 
 ```bash
