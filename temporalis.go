@@ -1,6 +1,9 @@
 package temporalis
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 func After(d time.Duration) <-chan time.Time {
 	return time.After(d)
@@ -91,4 +94,14 @@ func DateRange(start, end time.Time) []time.Time {
 	}
 
 	return dates
+}
+
+func DateDiff(start, end time.Time) (int, error) {
+	if end.Before(start) {
+		return 0, fmt.Errorf("end date %v is before start date %v", end, start)
+	}
+
+	diff := end.Sub(start)
+
+	return int(diff.Hours() / 24), nil
 }
