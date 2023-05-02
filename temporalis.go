@@ -165,3 +165,7 @@ func BusinessHours(from, to time.Time, holidays []time.Time) time.Duration {
 
 	return total
 }
+
+func IsLeapYear(year int) bool {
+	return year%4 == 0 && (year%100 != 0 || year%400 == 0)
+}
