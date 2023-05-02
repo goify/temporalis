@@ -60,6 +60,8 @@ func main() {
 }
 ```
 
+In this example, the `temporalis.Parse` function is used to parse a string in the format `2006-01-02 15:04:05` into a `time.Time` value. If there is an error parsing the string, the function returns an error.
+
 ## Testing
 
 ```bash
