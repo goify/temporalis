@@ -105,3 +105,33 @@ func DateDiff(start, end time.Time) (int, error) {
 
 	return int(diff.Hours() / 24), nil
 }
+
+func isWeekend(t time.Time) bool {
+	return t.Weekday() == time.Saturday || t.Weekday() == time.Sunday
+}
+
+func isHoliday(t time.Time, holidays []time.Time) bool {
+	for _, h := range holidays {
+		if t.Year() == h.Year() && t.Month() == h.Month() && t.Day() == h.Day() {
+			return true
+		}
+	}
+
+	return false
+}
+
+func WorkingDays(start, end time.Time, holidays []time.Time) (int, error) {
+	if end.Before(start) {
+		return 0, fmt.Errorf("end date %v is before start date %v", end, start)
+	}
+
+	weekdays := 0
+
+	for d := start; !d.After(end); d = d.AddDate(0, 0, 1) {
+		if !isWeekend(d) && !isHoliday(d, holidays) {
+			weekdays++
+		}
+	}
+
+	return weekdays, nil
+}
