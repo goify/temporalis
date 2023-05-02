@@ -4,8 +4,6 @@ import (
 	"time"
 )
 
-// Functions from the time package.
-
 func After(d time.Duration) <-chan time.Time {
 	return time.After(d)
 }
@@ -54,8 +52,6 @@ func Tick(d time.Duration) <-chan time.Time {
 
 	return c
 }
-
-// Additional functions for formatting and parsing.
 
 func Format(t time.Time, layout string) string {
 	return t.Format(layout)
