@@ -10,6 +10,32 @@ To install temporalis, use `go get`:
 go get github.com/iamando/temporalis
 ```
 
+## Usage
+
+To use the module in your Go program, import it using the following code:
+
+```go
+import "github.com/iamando/temporalis"
+```
+
+`temporalis` can be used just like the standard time package. Here's an example usage of the `temporalis` package:
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+
+    "github.com/iamando/temporalis"
+)
+
+func main() {
+    t := temporalis.Now()
+    fmt.Println(temporalis.Format(t, "2006-01-02 15:04:05"))
+}
+```
+
 ## Testing
 
 ```bash
