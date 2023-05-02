@@ -66,3 +66,19 @@ func ParseInLocation(layout, value string, loc *time.Location) (time.Time, error
 func ParseTime(str, format string) (time.Time, error) {
 	return time.Parse(format, str)
 }
+
+func ConvertTimezone(t time.Time, from, to string) (time.Time, error) {
+	locFrom, err := time.LoadLocation(from)
+
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	locTo, err := time.LoadLocation(to)
+
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return t.In(locFrom).In(locTo), nil
+}
