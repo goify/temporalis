@@ -189,3 +189,11 @@ func TimeDifference(from, to time.Time) time.Duration {
 func FormatTime(t time.Time, format string) string {
 	return t.Format(format)
 }
+
+func UnixTimestamp(t time.Time) int64 {
+	return t.Unix()
+}
+
+func FromUnixTimestamp(timestamp int64) time.Time {
+	return time.Unix(timestamp, 0)
+}
