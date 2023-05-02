@@ -208,3 +208,15 @@ func TimezoneOffset(tz string, t time.Time) (int, error) {
 
 	return offset, nil
 }
+
+func TimezoneAbbreviation(tz string) (string, error) {
+	loc, err := time.LoadLocation(tz)
+
+	if err != nil {
+		return "", err
+	}
+
+	now := time.Now().In(loc)
+
+	return now.Format("MST"), nil
+}
