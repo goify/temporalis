@@ -46,7 +46,7 @@ package main
 import (
     "fmt"
 
-    "github.com/your-username/temporalis"
+    "github.com/iamando/temporalis"
 )
 
 func main() {
