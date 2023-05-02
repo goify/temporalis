@@ -135,3 +135,20 @@ func WorkingDays(start, end time.Time, holidays []time.Time) (int, error) {
 
 	return weekdays, nil
 }
+
+func FormatDuration(duration time.Duration) string {
+	hours := int(duration.Hours())
+	minutes := int(duration.Minutes()) % 60
+	seconds := int(duration.Seconds()) % 60
+	milliseconds := int(duration.Milliseconds()) % 1000
+
+	if hours > 0 {
+		return fmt.Sprintf("%d hours, %d minutes, %d seconds", hours, minutes, seconds)
+	} else if minutes > 0 {
+		return fmt.Sprintf("%d minutes, %d seconds", minutes, seconds)
+	} else if seconds > 0 {
+		return fmt.Sprintf("%d.%03d seconds", seconds, milliseconds)
+	} else {
+		return fmt.Sprintf("%d milliseconds", milliseconds)
+	}
+}
