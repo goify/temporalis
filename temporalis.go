@@ -25,6 +25,30 @@ func Date(year int, month time.Month, day, hour, min, sec, nsec int, loc *time.L
 	return time.Date(year, month, day, hour, min, sec, nsec, loc)
 }
 
+// NewTicker returns a new Ticker containing a channel that will send the
+// current time with a period specified by the duration argument. It adjusts the
+// intervals or delays to make up for any slow-down or blocking of processing. The
+// ticker will keep sending values until the Stop method is called on the returned
+// Ticker object. If the duration is less than or equal to zero, NewTicker will
+// panic. Use the time.Ticker.Stop() method to stop the ticker before its normal
+// completion.
+//
+// Example usage:
+//
+//	ticker := temporalis.NewTicker(1 * time.Second)
+//	defer ticker.Stop()
+//	for {
+//		select {
+//		case t := <-ticker.C:
+//			fmt.Println("tick at", t)
+//		case <-done:
+//			return
+//		}
+//	}
+//
+// In the example above, a new ticker is created that ticks once per second.
+// The loop will keep running until either a value is received on the done
+// channel, or the ticker is stopped using the Stop() method.
 func NewTicker(d time.Duration) *time.Ticker {
 	return time.NewTicker(d)
 }
