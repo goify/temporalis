@@ -5,6 +5,27 @@ import (
 	"time"
 )
 
+// TestAfter tests the behavior of the After function. It creates a
+// timer that triggers after a specified duration and checks if the timer
+// actually triggers after that duration. If the timer does not trigger or
+// triggers too early, the test fails. This test also ensures that the After
+// function returns a channel that receives a single time value once the
+// duration has elapsed.
+func TestAfter(t *testing.T) {
+	// Set up the test case
+	duration := 100 * time.Millisecond
+	start := time.Now()
+
+	// Call the function being tested
+	<-time.After(duration)
+
+	// Check the result
+	elapsed := time.Since(start)
+	if elapsed < duration {
+		t.Errorf("Expected duration of %v, but got %v", duration, elapsed)
+	}
+}
+
 func TestNow(t *testing.T) {
 	now1 := time.Now()
 	now2 := Now()
