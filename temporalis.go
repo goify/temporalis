@@ -2,6 +2,7 @@ package temporalis
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -136,20 +137,47 @@ func WorkingDays(start, end time.Time, holidays []time.Time) (int, error) {
 	return weekdays, nil
 }
 
+// FormatDuration formats a time.Duration value into a human-readable string.
+// The string will list each unit of time in descending order of magnitude,
+// and will use the singular or plural form of the unit name as appropriate.
 func FormatDuration(duration time.Duration) string {
-	hours := int(duration.Hours())
-	minutes := int(duration.Minutes()) % 60
-	seconds := int(duration.Seconds()) % 60
-	milliseconds := int(duration.Milliseconds()) % 1000
+	seconds := int64(duration.Seconds())
 
+	days := seconds / 86400
+	seconds -= days * 86400
+
+	hours := seconds / 3600
+	seconds -= hours * 3600
+
+	minutes := seconds / 60
+	seconds -= minutes * 60
+
+	var parts []string
+	if days > 0 {
+		parts = append(parts, pluralize(days, "day"))
+	}
 	if hours > 0 {
-		return fmt.Sprintf("%d hours, %d minutes, %d seconds", hours, minutes, seconds)
-	} else if minutes > 0 {
-		return fmt.Sprintf("%d minutes, %d seconds", minutes, seconds)
-	} else if seconds > 0 {
-		return fmt.Sprintf("%d.%03d seconds", seconds, milliseconds)
-	} else {
-		return fmt.Sprintf("%d milliseconds", milliseconds)
+		parts = append(parts, pluralize(hours, "hour"))
+	}
+	if minutes > 0 {
+		parts = append(parts, pluralize(minutes, "minute"))
+	}
+	if seconds > 0 {
+		parts = append(parts, pluralize(seconds, "second"))
+	}
+
+	switch len(parts) {
+	case 0:
+		return "0 seconds"
+	case 1:
+		return parts[0]
+	case 2:
+		return fmt.Sprintf("%s and %s", parts[0], parts[1])
+	default:
+		last := parts[len(parts)-1]
+		parts = parts[:len(parts)-1]
+
+		return fmt.Sprintf("%s and %s", strings.Join(parts, ", "), last)
 	}
 }
 
