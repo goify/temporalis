@@ -75,6 +75,20 @@ func Sleep(d time.Duration) {
 	time.Sleep(d)
 }
 
+// Tick returns a new ticker that sends the current time on the returned
+// channel at a regular interval defined by the duration argument. The ticker
+// will start immediately and continue indefinitely, until stopped explicitly
+// by calling its `Stop` method. The channel will close when the ticker is
+// stopped.
+//
+// The ticker may adjust the time interval slightly to make the interval fit
+// more accurately into the time grid defined by the operating system or
+// hardware.
+//
+// Note that this function is usually only appropriate for use in endless
+// functions, tests, and the main package. If you need to stop the ticker
+// explicitly, or if you need a ticker that only runs for a limited number of
+// times, consider using the `NewTicker` function instead.
 func Tick(d time.Duration) <-chan time.Time {
 	ticker := time.NewTicker(d)
 	done := make(chan struct{})
