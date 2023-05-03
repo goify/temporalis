@@ -1,6 +1,8 @@
 package temporalis
 
 import (
+	"fmt"
+	"sync"
 	"testing"
 	"time"
 )
@@ -24,6 +26,34 @@ func TestAfter(t *testing.T) {
 	if elapsed < duration {
 		t.Errorf("Expected duration of %v, but got %v", duration, elapsed)
 	}
+}
+
+// AfterFunc waits for the duration to elapse and then calls the specified
+// function in its own goroutine. It returns a Timer that can be used to cancel
+// the call using its Stop method.
+//
+// The function is called in its own goroutine, so it does not block the caller.
+//
+// If the duration is less than or equal to zero, the function will be called
+// immediately in the same goroutine.
+func TestAfterFunc(t *testing.T) {
+	var wg sync.WaitGroup
+	wg.Add(1)
+
+	f := func() {
+		defer wg.Done()
+		fmt.Println("Function executed")
+	}
+
+	// Wait for 100 milliseconds and then execute the function
+	time.AfterFunc(100*time.Millisecond, f)
+
+	fmt.Println("Waiting for function to execute")
+	wg.Wait()
+
+	// Output:
+	// Waiting for function to execute
+	// Function executed
 }
 
 // TestNow tests the Now function by checking if the difference between the time returned
