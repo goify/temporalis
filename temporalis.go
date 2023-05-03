@@ -12,6 +12,9 @@ func After(d time.Duration) <-chan time.Time {
 	return time.After(d)
 }
 
+// AfterFunc waits for the duration specified by d and then calls the function f
+// in its own goroutine. It returns a Timer struct that can be used to cancel
+// the function before it runs.
 func AfterFunc(d time.Duration, f func()) *time.Timer {
 	return time.AfterFunc(d, f)
 }
