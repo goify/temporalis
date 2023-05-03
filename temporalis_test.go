@@ -26,6 +26,9 @@ func TestAfter(t *testing.T) {
 	}
 }
 
+// TestNow tests the Now function by checking if the difference between the time returned
+// by Now and the current system time is within a reasonable range. This test ensures that
+// Now returns the correct time.
 func TestNow(t *testing.T) {
 	now1 := time.Now()
 	now2 := Now()
@@ -35,6 +38,12 @@ func TestNow(t *testing.T) {
 	}
 }
 
+// TestFormat tests the behavior of the Format function by checking that it correctly formats
+// a given time.Time object according to a specified layout string. It first creates a mock
+// time object with a known format, then formats it using the Format function and checks
+// that the resulting string matches the expected output. It also tests that the function
+// correctly handles the case when the time object is in a different timezone than the
+// machine running the test.
 func TestFormat(t *testing.T) {
 	layout := "2006-01-02 15:04:05"
 	str := "2022-05-02 10:30:00"
@@ -46,6 +55,14 @@ func TestFormat(t *testing.T) {
 	}
 }
 
+// TestParse is a unit test function that tests the Parse function by parsing a string
+// containing a date and time in a specific format and comparing the resulting time value
+// with an expected time value. The test fails if the parsed time value is different from
+// the expected time value or if an error occurs during the parsing operation.
+//
+// This test covers the cases where the string to be parsed is in a valid format and contains
+// a valid date and time. To test the behavior of Parse when the input is invalid or ambiguous,
+// additional test cases should be added.
 func TestParse(t *testing.T) {
 	layout := "2006-01-02 15:04:05"
 	str := "2022-05-02 10:30:00"
