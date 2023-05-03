@@ -1,9 +1,11 @@
 package temporalis
 
-// pluralize returns the plural suffix "s" if the given number is not 1.
-func pluralize(n int) string {
-	if n == 1 {
-		return ""
+import "fmt"
+
+// pluralize returns the plural form of the given word if the count is not 1.
+func pluralize(count int64, word string) string {
+	if count == 1 {
+		return fmt.Sprintf("%d %s", count, word)
 	}
-	return "s"
+	return fmt.Sprintf("%d %ss", count, word)
 }
