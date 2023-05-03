@@ -62,6 +62,8 @@ func NewTimer(d time.Duration) *time.Timer {
 	return time.NewTimer(d)
 }
 
+// Now returns the current local time.
+// This function is equivalent to calling time.Now() but returns a time.Time value in the local timezone.
 func Now() time.Time {
 	return time.Now()
 }
