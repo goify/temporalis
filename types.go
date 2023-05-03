@@ -21,21 +21,6 @@ type Time struct {
 
 type Month int
 
-const (
-	January Month = 1 + iota
-	February
-	March
-	April
-	May
-	June
-	July
-	August
-	September
-	October
-	November
-	December
-)
-
 var Months = [...]string{
 	January:   "January",
 	February:  "February",
@@ -77,16 +62,6 @@ type zoneTrans struct {
 }
 
 type Weekday int
-
-const (
-	Sunday Weekday = iota
-	Monday
-	Tuesday
-	Wednesday
-	Thursday
-	Friday
-	Saturday
-)
 
 var Weekdays = [...]string{
 	Sunday:    "Sunday",
