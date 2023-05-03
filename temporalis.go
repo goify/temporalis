@@ -53,6 +53,11 @@ func NewTicker(d time.Duration) *time.Ticker {
 	return time.NewTicker(d)
 }
 
+// NewTimer creates a new Timer that will send the current time on its channel after at least duration d.
+// The returned timer contains a single channel that will be sent the current time when the timer expires.
+// To use the timer, call its `C` method, which returns the channel on which the time will be sent.
+// If the timer is not needed, it should be stopped by calling its `Stop` method.
+// If the timer has already expired, the time will be sent immediately on the channel.
 func NewTimer(d time.Duration) *time.Timer {
 	return time.NewTimer(d)
 }
