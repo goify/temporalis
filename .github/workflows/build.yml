@@ -26,4 +26,4 @@ jobs:
 
       - run: go test
 
-      # - run: GOPROXY=proxy.golang.org go list -m github.com/iamando/temporalis
+      - run: GOPROXY=proxy.golang.org go list -m github.com/iamando/temporalis
