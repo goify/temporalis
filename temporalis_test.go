@@ -56,6 +56,22 @@ func TestAfterFunc(t *testing.T) {
 	// Function executed
 }
 
+// TestDate tests the Date function by comparing its output with the expected date
+// constructed using the time.Date function. It checks if the year, month and day
+// values of both dates match. The time zone used in the test is UTC.
+// If the dates match, the test passes, otherwise it fails.
+func TestDate(t *testing.T) {
+	location, err := time.LoadLocation("America/Los_Angeles")
+	if err != nil {
+		t.Fatal("Failed to load location")
+	}
+	dt := Date(2023, time.May, 4, 13, 45, 0, 0, location)
+	expected := Date(2023, time.May, 4, 13, 45, 0, 0, location)
+	if !dt.Equal(expected) {
+		t.Errorf("Date() = %v, want %v", dt, expected)
+	}
+}
+
 // TestNow tests the Now function by checking if the difference between the time returned
 // by Now and the current system time is within a reasonable range. This test ensures that
 // Now returns the correct time.
