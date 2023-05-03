@@ -19,6 +19,8 @@ func AfterFunc(d time.Duration, f func()) *time.Timer {
 	return time.AfterFunc(d, f)
 }
 
+// Date returns the Time corresponding to
+// 00:00:00.0 UTC on the specified date in the given location.
 func Date(year int, month time.Month, day, hour, min, sec, nsec int, loc *time.Location) time.Time {
 	return time.Date(year, month, day, hour, min, sec, nsec, loc)
 }
