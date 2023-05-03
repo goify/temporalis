@@ -68,6 +68,9 @@ func Now() time.Time {
 	return time.Now()
 }
 
+// Sleep pauses the current goroutine for at least the duration d.
+// A negative or zero duration causes Sleep to return immediately.
+// This function is equivalent to time.Sleep in the standard library.
 func Sleep(d time.Duration) {
 	time.Sleep(d)
 }
