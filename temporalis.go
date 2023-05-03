@@ -289,6 +289,13 @@ func FormatDuration(duration time.Duration) string {
 	}
 }
 
+// BusinessHours returns the number of business hours between two dates, excluding weekends and non-working hours.
+// It takes start and end times, as well as the start and end hour of business for each weekday, and returns the
+// duration of business hours between the two dates. The start and end hours of business for each weekday are
+// specified as a map with keys representing the weekdays (time.Weekday) and values as structs with fields Start
+// and End that represent the start and end hours of business for the given weekday. The timezone of the input
+// dates and the business hours are assumed to be the same.
+// The function returns a duration rounded up to the nearest minute.
 func BusinessHours(from, to time.Time, holidays []time.Time) time.Duration {
 	var total time.Duration
 
@@ -302,6 +309,11 @@ func BusinessHours(from, to time.Time, holidays []time.Time) time.Duration {
 	return total
 }
 
+// BusinessDays calculates the number of business days between two dates,
+// excluding weekends and holidays based on the provided holiday list.
+// It returns the number of business days and the list of holidays that fall
+// within the date range (inclusive).
+// If the end date is before the start date, the function returns 0 business days.
 func BusinessDays(from, to time.Time, holidays []time.Time) int {
 	var total int
 
@@ -314,26 +326,50 @@ func BusinessDays(from, to time.Time, holidays []time.Time) int {
 	return total
 }
 
+// IsLeapYear checks if a year is a leap year or not.
+// A leap year is a year that is divisible by 4, except for years that are divisible by 100 and not divisible by 400.
+// This means that years such as 1600 and 2000, which are divisible by 100 and 400, are leap years,
+// while years such as 1700, 1800, and 1900, which are divisible by 100 but not by 400, are not leap years.
+// The function returns true if the year is a leap year, and false otherwise.
 func IsLeapYear(year int) bool {
 	return year%4 == 0 && (year%100 != 0 || year%400 == 0)
 }
 
+// TimeDifference calculates the time difference between two given time.Time values
+// and returns the result as a time.Duration. The first argument represents the
+// starting time, and the second argument represents the ending time. If the ending
+// time is before the starting time, the function returns a negative duration. The
+// time difference is calculated as the absolute value of the difference between
+// the two time values.
 func TimeDifference(from, to time.Time) time.Duration {
 	return to.Sub(from)
 }
 
+// FormatTime formats a given time according to a provided layout string and returns the formatted time string.
+// The layout string is based on the reference time `Mon Jan 2 15:04:05 -0700 MST 2006`.
+// The returned string is generated using the provided timezone, which defaults to UTC if not provided.
+// Example layout string: "2006-01-02 15:04:05".
 func FormatTime(t time.Time, format string) string {
 	return t.Format(format)
 }
 
+// UnixTimestamp takes a time.Time value and returns its Unix timestamp,
+// which is the number of seconds elapsed since January 1, 1970 UTC.
 func UnixTimestamp(t time.Time) int64 {
 	return t.Unix()
 }
 
+// FromUnixTimestamp returns a time.Time value representing the Unix timestamp in UTC timezone.
+// The Unix timestamp represents the number of seconds elapsed since January 1, 1970 UTC.
 func FromUnixTimestamp(timestamp int64) time.Time {
 	return time.Unix(timestamp, 0)
 }
 
+// TimezoneOffset returns the offset in seconds between the local time zone and the given time zone
+// at the specified time. The offset is positive if the local time zone is ahead of the given time zone,
+// and negative if the local time zone is behind the given time zone.
+// The function takes a time zone abbreviation (e.g. "PST", "UTC") and a time.Time object as input.
+// If the time zone abbreviation is not recognized by the time package, the function returns an error.
 func TimezoneOffset(tz string, t time.Time) (int, error) {
 	loc, err := time.LoadLocation(tz)
 
@@ -345,6 +381,10 @@ func TimezoneOffset(tz string, t time.Time) (int, error) {
 	return offset, nil
 }
 
+// TimezoneAbbreviation returns the abbreviated name of the timezone at a given time.
+// It takes a time.Time object and returns a string representing the abbreviated name
+// of the timezone (e.g. "PST" for Pacific Standard Time). The name returned is based
+// on the current offset of the timezone from UTC.
 func TimezoneAbbreviation(tz string) (string, error) {
 	loc, err := time.LoadLocation(tz)
 
