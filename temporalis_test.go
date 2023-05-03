@@ -16,10 +16,10 @@ import (
 func TestAfter(t *testing.T) {
 	// Set up the test case
 	duration := 100 * time.Millisecond
-	start := time.Now()
+	start := Now()
 
 	// Call the function being tested
-	<-time.After(duration)
+	<-After(duration)
 
 	// Check the result
 	elapsed := time.Since(start)
@@ -46,7 +46,7 @@ func TestAfterFunc(t *testing.T) {
 	}
 
 	// Wait for 100 milliseconds and then execute the function
-	time.AfterFunc(100*time.Millisecond, f)
+	AfterFunc(100*time.Millisecond, f)
 
 	fmt.Println("Waiting for function to execute")
 	wg.Wait()
@@ -60,7 +60,7 @@ func TestAfterFunc(t *testing.T) {
 // by Now and the current system time is within a reasonable range. This test ensures that
 // Now returns the correct time.
 func TestNow(t *testing.T) {
-	now1 := time.Now()
+	now1 := Now()
 	now2 := Now()
 
 	if now2.Sub(now1) > time.Second {
@@ -77,7 +77,7 @@ func TestNow(t *testing.T) {
 func TestFormat(t *testing.T) {
 	layout := "2006-01-02 15:04:05"
 	str := "2022-05-02 10:30:00"
-	t1, _ := time.Parse(layout, str)
+	t1, _ := Parse(layout, str)
 	formatted := Format(t1, layout)
 
 	if formatted != str {
@@ -96,7 +96,7 @@ func TestFormat(t *testing.T) {
 func TestParse(t *testing.T) {
 	layout := "2006-01-02 15:04:05"
 	str := "2022-05-02 10:30:00"
-	t1, _ := time.Parse(layout, str)
+	t1, _ := Parse(layout, str)
 	parsed, err := Parse(layout, str)
 
 	if err != nil {
