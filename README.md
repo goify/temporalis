@@ -1,5 +1,10 @@
 # Temporalis
 
+![build](https://github.com/iamando/temporalis/workflows/build/badge.svg)
+![license](https://img.shields.io/github/license/iamando/temporalis?color=success)
+![Go version](https://img.shields.io/github/go-mod/go-version/iamando/temporalis)
+[![GoDoc](https://godoc.org/github.com/iamando/temporalis?status.svg)](https://godoc.org/github.com/iamando/temporalis)
+
 Go package that provides additional functionality for working with time values beyond what is provided by the standard time package. It includes all of the functions from the `time` package as well as additional functions for formatting and parsing time values.
 
 ## Installation
@@ -25,7 +30,6 @@ package main
 
 import (
     "fmt"
-    "time"
 
     "github.com/iamando/temporalis"
 )
