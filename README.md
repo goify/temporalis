@@ -1,9 +1,9 @@
 # Temporalis
 
-![build](https://github.com/iamando/temporalis/workflows/build/badge.svg)
-![license](https://img.shields.io/github/license/iamando/temporalis?color=success)
-![Go version](https://img.shields.io/github/go-mod/go-version/iamando/temporalis)
-[![GoDoc](https://godoc.org/github.com/iamando/temporalis?status.svg)](https://godoc.org/github.com/iamando/temporalis)
+![build](https://github.com/goify/temporalis/workflows/build/badge.svg)
+![license](https://img.shields.io/github/license/goify/temporalis?color=success)
+![Go version](https://img.shields.io/github/go-mod/go-version/goify/temporalis)
+[![GoDoc](https://godoc.org/github.com/goify/temporalis?status.svg)](https://godoc.org/github.com/goify/temporalis)
 
 Go package that provides additional functionality for working with time values beyond what is provided by the standard time package. It includes all of the functions from the `time` package as well as additional functions for formatting and parsing time values.
 
@@ -12,7 +12,7 @@ Go package that provides additional functionality for working with time values b
 To install temporalis, use `go get`:
 
 ```bash
-go get github.com/iamando/temporalis
+go get github.com/goify/temporalis
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ go get github.com/iamando/temporalis
 To use the module in your Go program, import it using the following code:
 
 ```go
-import "github.com/iamando/temporalis"
+import "github.com/goify/temporalis"
 ```
 
 `temporalis` can be used just like the standard time package. Here's an example usage of the `temporalis` package:
@@ -31,7 +31,7 @@ package main
 import (
     "fmt"
 
-    "github.com/iamando/temporalis"
+    "github.com/goify/temporalis"
 )
 
 func main() {
@@ -50,7 +50,7 @@ package main
 import (
     "fmt"
 
-    "github.com/iamando/temporalis"
+    "github.com/goify/temporalis"
 )
 
 func main() {

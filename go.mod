@@ -1,3 +1,3 @@
-module github.com/iamando/temporalis
+module github.com/goify/temporalis
 
-go 1.19
+go 1.21.0
